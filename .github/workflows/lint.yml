@@ -1,0 +1,21 @@
+name: Lint
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  lint:
+    name: Check formatting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v3
+
+      - name: Run pre-commit
+        uses: pre-commit/action@v3.0.0
+
+      - uses: pre-commit-ci/lite-action@v1.0.1
+        if: always()

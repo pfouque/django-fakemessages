@@ -1,0 +1,52 @@
+name: Tests
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.8", "3.9", "3.10", "3.11"]
+        django-version: ["3.2", "4.0", "4.1", "4.2a1"]
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v3
+
+      - uses: snok/install-poetry@v1
+        with:
+          version: 1.3.2
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: poetry
+
+
+      - name: Ensure Python version ${{ matrix.python-version }}
+        # https://github.com/actions/setup-python/issues/425
+        run: poetry env use ${{ matrix.python-version }}
+
+      - name: Install requirements
+        run: poetry install
+
+      - name: Install django ${{ matrix.django-version }}
+        run: poetry add "django@~=${{ matrix.django-version }}"
+
+      - name: Django check
+        run: poetry run python manage.py check
+
+      - name: Run tests
+        run: poetry run pytest --verbose
+        env:
+          FORCE_COLOR: true
