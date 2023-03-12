@@ -11,6 +11,10 @@ jobs:
     name: Check coverage
     runs-on: ubuntu-latest
     steps:
+      - name: Install gettext
+        run: |
+          sudo apt-get update && sudo apt-get install -y gettext
+
       - name: Check out
         uses: actions/checkout@v3
 
