@@ -17,6 +17,10 @@ jobs:
         django-version: ["3.2", "4.0", "4.1", "4.2a1"]
 
     steps:
+      - name: Install gettext
+        run: |
+          sudo apt-get update && sudo apt-get install -y gettext
+
       - name: Check out the repository
         uses: actions/checkout@v3
 
