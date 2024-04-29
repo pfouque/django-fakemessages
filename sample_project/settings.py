@@ -114,7 +114,6 @@ USE_TZ = True
 TIME_ZONE = "UTC"
 
 USE_I18N = True
-USE_L10N = True
 
 LOCALE_PATHS = (BASE_DIR / "locales",)
 
