@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "django-fakemessages"
 version = "0.0.1"
-description = "Generate fake language files"
+description = "Generate fake PO language files"
 license = "MIT"
 authors = [
     "Pascal Fouque <fouquepascal@gmail.com>",
@@ -33,7 +33,7 @@ packages = [{ include = "fakemessages" }]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-django = "^3.2 || ^4.0 || ^4.1 || ^4.2"
+django = "^4.2 || ^5.0"
 translate-toolkit = "^3.8.5"
 
 [tool.poetry.group.dev.dependencies]
@@ -48,10 +48,6 @@ pytest-django = "*"
 pytest-randomly = "*"
 pytest-xdist = "*"
 ruff = "*"
-
-[tool.black]
-line-length = 90
-target-version = ['py38']
 
 [tool.ruff]
 line-length = 90
