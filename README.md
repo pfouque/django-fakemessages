@@ -8,7 +8,17 @@
 
 ## Introduction
 
-Looking for missing translations in your Django project? Let's censor what is done and see what remains!
+**Looking for missing translations in your Django project? Let's censor what is done and see what remains!**
+
+I wrote this while working on a project where translations were not enabled from the beginning. I
+ended up hunting every single string that was missing from the translation set, and comparing two
+languages by eye is tricky (even with a different alphabet).
+
+So I wanted something much more obvious: a fake language that makes untranslated text stand out
+immediately. We even used it on stagings with non-developers to quickly understand whether a
+translation was simply missing or was not part of the `.po` files at all.
+
+![django-fakemessages demo screenshot](docs/django-fakemessages-demo.jpg)
 
 ## Resources
 
@@ -17,8 +27,8 @@ Looking for missing translations in your Django project? Let's censor what is do
 
 ## Requirements
 
--   Django >=3.2
--   Python >=3.8
+-   Django >=4.2
+-   Python >=3.10
 -   Translate-toolkit >=3.8.5
 
 ## How to
@@ -62,7 +72,7 @@ Looking for missing translations in your Django project? Let's censor what is do
 ### Principles
 
 -   Simple for developers to get up-and-running
--   Consistent style (`black`, `ruff`)
+-   Consistent style (`ruff`)
 -   Future-proof (`pyupgrade`)
 -   Full type hinting (`mypy`)
 
@@ -85,7 +95,7 @@ You can then run all tools:
 
 It includes the following:
 
--   `poetry` for dependency management
+-   `uv` for project and dependency management
 -   `Ruff`, `black` and `pyupgrade` linting
 -   `mypy` for type checking
 -   `Github Actions` for builds and CI
@@ -103,24 +113,25 @@ developers can spin up the test app and see what admin screens look like, test m
 
 #### Running tests
 
-The tests themselves use `pytest` as the test runner. If you have installed the `poetry` evironment,
+The tests themselves use `pytest` as the test runner. If you have installed the `uv` environment,
 you can run them thus:
 
 ```
-$ poetry run pytest
+$ uv run pytest
 ```
 
 or
 
 ```
-$ poetry shell
-(django-fakemessages-py3.10) $ pytest
+$ uv sync --dev
+$ source .venv/bin/activate
+(.venv) $ pytest
 ```
 
 #### CI
 
 - `.github/workflows/lint.yml`: Defines and ensure coding rules on Github.
 
-- `.github/workflows/test.yml`: Runs tests on all compatible combinations of Django (3.2+) & Python (3.8+) in a Github matrix.
+- `.github/workflows/test.yml`: Runs tests on supported Python (3.12-3.14) with Django 6.0 in a GitHub matrix.
 
 - `.github/workflows/coverage.yml`: Calculates the coverage on an up to date version.

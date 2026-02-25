@@ -14,18 +14,19 @@ class Command(BaseCommand):
     help = (
         "Generate fake translation files for settings.FAKE_LANGUAGE_CODE\n\n"
         "Based on podebug from translate-toolkit, it replaces all characters by '▮'"
-        "(like if the NSA 'classified'), in order to spot easily what is not part of the translation yet."
+        "(like if the NSA 'classified'), in order to spot easily untranslatied strings."
     )
 
     def handle(self, *args: Any, **options: Any) -> None:
         self.stdout.write(
             f"Generating fake locale {settings.FAKE_LANGUAGE_CODE} from {settings.LANGUAGE_CODE}"
         )
-        run(
-            [
+        run(  # noqa: S603
+            [  # noqa: S607
                 "podebug",
                 "--rewrite=classified",
                 LOCALE_PATH / settings.LANGUAGE_CODE,
                 LOCALE_PATH / settings.FAKE_LANGUAGE_CODE,
-            ]
+            ],
+            check=True,
         )
