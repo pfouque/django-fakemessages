@@ -1,11 +1,12 @@
 from __future__ import annotations
 
 import pathlib
-from subprocess import run
+import sys
 from typing import Any
 
 from django.conf import settings
 from django.core.management.base import BaseCommand
+from translate.tools import podebug
 
 LOCALE_PATH = pathlib.Path(settings.LOCALE_PATHS[0])
 
@@ -21,12 +22,14 @@ class Command(BaseCommand):
         self.stdout.write(
             f"Generating fake locale {settings.FAKE_LANGUAGE_CODE} from {settings.LANGUAGE_CODE}"
         )
-        run(  # noqa: S603
-            [  # noqa: S607
+        argv = sys.argv
+        try:
+            sys.argv = [
                 "podebug",
                 "--rewrite=classified",
-                LOCALE_PATH / settings.LANGUAGE_CODE,
-                LOCALE_PATH / settings.FAKE_LANGUAGE_CODE,
-            ],
-            check=True,
-        )
+                str(LOCALE_PATH / settings.LANGUAGE_CODE),
+                str(LOCALE_PATH / settings.FAKE_LANGUAGE_CODE),
+            ]
+            podebug.main()
+        finally:
+            sys.argv = argv
