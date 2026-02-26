@@ -41,9 +41,8 @@ msgid ""
 "configured any URLs."
 msgstr ""
 "▮▮▮ ▮▮▮ ▮▮▮▮▮▮ ▮▮▮▮ ▮▮▮▮ ▮▮▮▮▮▮▮ <a href=\"https://docs.djangoproject.com/en/"
-"%(version)s/ref/settings/#debug\" target=\"_blank\" rel=\"noopener\""
-">▮▮▮▮▮=▮▮▮▮</a> ▮▮ ▮▮ ▮▮▮▮ ▮▮▮▮▮▮▮▮ ▮▮▮▮ ▮▮▮ ▮▮▮ ▮▮▮▮ ▮▮▮ ▮▮▮▮▮▮▮▮▮▮ ▮▮▮ "
-"▮▮▮▮."
+"%(version)s/ref/settings/#debug\" target=\"_blank\" rel=\"noopener\">▮▮▮▮▮=▮▮"
+"▮▮</a> ▮▮ ▮▮ ▮▮▮▮ ▮▮▮▮▮▮▮▮ ▮▮▮▮ ▮▮▮ ▮▮▮ ▮▮▮▮ ▮▮▮ ▮▮▮▮▮▮▮▮▮▮ ▮▮▮ ▮▮▮▮."
 
 #: sample_project/templates/default_urlconf.html:230
 msgid "Django Documentation"
