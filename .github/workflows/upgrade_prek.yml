@@ -1,4 +1,4 @@
-name: Pre-commit auto-update
+name: Prek auto-update
 
 on:
   # every month
@@ -14,13 +14,17 @@ jobs:
       - uses: actions/checkout@v6
 
       - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
 
-      - uses: browniebroke/pre-commit-autoupdate-action@v1.0.1
+      - run: pip install prek
+
+      - run: prek auto-update
 
       - uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          branch: update/pre-commit-hooks
-          title: Update pre-commit hooks
-          commit-message: "chore: update pre-commit hooks"
-          body: Update versions of pre-commit hooks to latest version.
+          branch: update/prek-hooks
+          title: Update prek hooks
+          commit-message: "chore: update prek hooks"
+          body: Update versions of prek-managed hooks to latest version.
