@@ -78,19 +78,18 @@ translation was simply missing or was not part of the `.po` files at all.
 
 ### Coding style
 
-We use [pre-commit](https://pre-commit.com/) to run code quality tools.
-[Install pre-commit](https://pre-commit.com/#install) however you like (e.g.
-`pip install pre-commit` with your system python) then set up pre-commit to run every time you
-commit with:
+We use [prek](https://prek.j178.dev/) to run code quality tools.
+[Install prek](https://prek.j178.dev/quickstart/) however you like (for example
+`uv tool install prek`) then set up Git hooks to run every time you commit with:
 
 ```bash
-> pre-commit install
+> prek install
 ```
 
 You can then run all tools:
 
 ```bash
-> pre-commit run --all-files
+> prek run --all-files
 ```
 
 It includes the following:

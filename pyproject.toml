@@ -44,7 +44,7 @@ dev = [
     "coverage",
     "django-stubs[compatible-mypy]",
     "mypy",
-    "pre-commit",
+    "prek",
     "pytest",
     "pytest-cov",
     "pytest-django",
