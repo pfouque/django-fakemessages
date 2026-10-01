@@ -20,7 +20,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/crate-ci/typos
-    rev: v1.46.0
+    rev: v1.50.3
     hooks:
       - id: typos
         args: []
@@ -35,22 +35,24 @@ repos:
           - "--py310-plus"
 
   - repo: https://github.com/adamchainz/django-upgrade
-    rev: 1.30.0
+    rev: 1.32.0
     hooks:
       - id: django-upgrade
         args: [--target-version, "4.2"]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.15.12
+    rev: v0.16.9
     hooks:
       - id: ruff-format
       - id: ruff-check
 
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.20.2
+  # Run mypy from the uv environment so it type-checks against the project's own
+  # locked dependencies, instead of a second, separately-pinned set of stubs.
+  - repo: local
     hooks:
       - id: mypy
-        args: []
-        additional_dependencies:
-          - django-stubs
-          - translate-toolkit
+        name: mypy
+        entry: uv run --frozen mypy
+        language: system
+        types: [python]
+        require_serial: true
