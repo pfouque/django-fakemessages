@@ -10,17 +10,14 @@ maintainers = [
     { name = "Pascal Fouque", email = "fouquepascal@gmail.com" },
 ]
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 classifiers = [
     "Development Status :: 1 - Planning",
     "Environment :: Web Environment",
     "Framework :: Django",
-    "Framework :: Django :: 4.2",
-    "Framework :: Django :: 5",
-    "Framework :: Django :: 5.0",
-    "Framework :: Django :: 5.1",
     "Framework :: Django :: 5.2",
     "Framework :: Django :: 6.0",
+    "Framework :: Django :: 6.1",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.10",
@@ -51,6 +48,8 @@ dev = [
     "pytest-randomly",
     "ruff",
     "tox",
+    "tox-gh-actions",
+    "tox-uv",
 ]
 
 [tool.uv]
@@ -73,6 +72,7 @@ fix = true
 select = ["ALL"]
 extend-ignore = [
     "COM812",  # This rule may cause conflicts when used with the formatter
+    "CPY001",  # Missing copyright notice at top of file
     "D",  # pydocstyle
     "DOC",  # pydoclint
     "B",

@@ -35,6 +35,10 @@ translation was simply missing or was not part of the `.po` files at all.
 
 1. Install
     ```
+    $ uv add "django-fakemessages"
+    ```
+    or
+    ```
     $ pip install "django-fakemessages"
     ```
 
@@ -76,6 +80,21 @@ translation was simply missing or was not part of the `.po` files at all.
 -   Future-proof (`pyupgrade`)
 -   Full type hinting (`mypy`)
 
+### Getting started
+
+The project is managed with [uv](https://docs.astral.sh/uv/).
+[Install uv](https://docs.astral.sh/uv/getting-started/installation/), then:
+
+```bash
+> uv sync
+```
+
+That creates `.venv` from the pinned `uv.lock` and installs the `dev` dependency
+group (it is the default group, so no extra flag is needed). uv also downloads a
+suitable Python itself, so no system Python setup is required.
+
+Prefix commands with `uv run` to use that environment, for example `uv run pytest`.
+
 ### Coding style
 
 We use [prek](https://prek.j178.dev/) to run code quality tools.
@@ -95,8 +114,9 @@ You can then run all tools:
 It includes the following:
 
 -   `uv` for project and dependency management
--   `Ruff`, `black` and `pyupgrade` linting
--   `mypy` for type checking
+-   `Ruff` and `pyupgrade` linting
+-   `mypy` for type checking, run through `uv run` so it sees the locked
+    dependencies (so `uv` must be on your `PATH` for the hooks to work)
 -   `Github Actions` for builds and CI
 
 There are default config files for the linting and mypy.
@@ -122,15 +142,29 @@ $ uv run pytest
 or
 
 ```
-$ uv sync --dev
+$ uv sync
 $ source .venv/bin/activate
 (.venv) $ pytest
+```
+
+To run the full Python x Django matrix, use `tox`. It is wired to
+[tox-uv](https://github.com/tox-dev/tox-uv), so uv builds the environments and
+fetches any Python version that is missing:
+
+```
+$ uv run tox
+```
+
+```
+$ uv run tox -e py313-dj52      # a single environment
+$ uv run tox -f dj60            # every environment for Django 6.0
 ```
 
 #### CI
 
 - `.github/workflows/lint.yml`: Defines and ensure coding rules on Github.
 
-- `.github/workflows/test.yml`: Runs tests on supported Python (3.12-3.14) with Django 6.0 in a GitHub matrix.
+- `.github/workflows/test.yml`: Runs the `tox` matrix on each supported Python (3.10-3.14)
+  against every supported Django version, in a GitHub matrix.
 
 - `.github/workflows/coverage.yml`: Calculates the coverage on an up to date version.

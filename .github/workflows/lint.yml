@@ -12,4 +12,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v6
+
+    # The mypy hook runs through `uv run`, so uv must be on PATH for prek.
+    - name: Install uv
+      uses: astral-sh/setup-uv@v7
+      with:
+        enable-cache: true
+
     - uses: j178/prek-action@v3.0.0

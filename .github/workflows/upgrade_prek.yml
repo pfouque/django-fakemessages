@@ -13,13 +13,12 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - uses: actions/setup-python@v7
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
         with:
-          python-version: "3.13"
+          enable-cache: true
 
-      - run: pip install prek
-
-      - run: prek auto-update
+      - run: uv run prek auto-update
 
       - uses: peter-evans/create-pull-request@v8
         with:
